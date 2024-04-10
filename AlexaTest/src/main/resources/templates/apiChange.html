@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API Content Manager</title>
+</head>
+<body>
+    <h2>Aktueller API-Inhalt</h2>
+    <div id="apiContent">Lade...</div>
+    <h2>Inhalt ändern</h2>
+    <input type="text" id="newContent">
+    <button onclick="updateContent()">Abschicken</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/message')
+                .then(response => response.text())
+                .then(data => document.getElementById('apiContent').innerText = data)
+                .catch(error => console.error('Fehler beim Laden des API-Inhalts:', error));
+        });
+
+        function updateContent() {
+            const newContent = document.getElementById('newContent').value;
+            fetch('/admin/api/update-message', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ message: newContent })
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('apiContent').innerText = data;
+                document.getElementById('newContent').value = ''; // Feld leeren
+            })
+            .catch(error => console.error('Fehler beim Aktualisieren des Inhalts:', error));
+        }
+    </script>
+</body>
+</html>
