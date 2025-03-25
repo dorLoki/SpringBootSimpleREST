@@ -1,6 +1,6 @@
-# Alexa Skill Test Web Server
+# Spring Boot Simple REST
 
-This project serves as a test web server for an Alexa Skill, developed as part of a university project using Spring Boot.
+This project is a simple REST service built with Spring Boot, developed as part of a university project for an Alexa Skill.
 
 ## Overview
 
